@@ -1,6 +1,8 @@
 describe MoneySign do
+  subject {MoneySign.new(amount)}
+
   context "pence no decimal point" do
-    subject {MoneySign.new("197p")}
+    let(:amount) {"197p"}
 
     its(:pound_sign?) {should == false}
     its(:decimal_point?) {should == false}
@@ -10,7 +12,7 @@ describe MoneySign do
 
 
   context "pounds decimal" do
-    subject {MoneySign.new("1.87")}
+    let(:amount) {"1.87"}
 
     its(:pound_sign?) {should == false}
     its(:decimal_point?) {should == true}
@@ -19,7 +21,7 @@ describe MoneySign do
   end
 
   context "pound symbol" do
-    subject {MoneySign.new("£1.23")}
+    let(:amount) {"£1.23"}
 
     its(:pound_sign?) {should == true}
     its(:decimal_point?) {should == true}
@@ -28,7 +30,7 @@ describe MoneySign do
   end
 
   context "double digit pound symbol" do
-    subject {MoneySign.new("£10")}
+    let(:amount) {"£10"}
 
     its(:pound_sign?) {should == true}
     its(:decimal_point?) {should == false}
