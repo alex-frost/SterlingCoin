@@ -62,4 +62,8 @@ class CoinInputFormatter
     (striped[-1] == "p") ? striped[0..-2] : striped
   end
 
+  def money_sign
+    @mony_sign ||= MoneySign.new(@input_amount)
+  end
+
 end
