@@ -7,7 +7,8 @@ class CoinCalculator
 
   def amount_in_sterling
     if valid?
-      convert(pounds, pound_coins).merge(convert(pence, pence_coins))
+      in_each_denomination({value: pounds, demomination: pound_coins, sign: "£"}).
+        merge(in_each_denomination({value: pence, demomination: pence_coins, sign: "p"}))
     else
       {}
     end
@@ -15,15 +16,18 @@ class CoinCalculator
 
   private
 
-  def convert(pound_or_pence, denomination)
-    remaining_coin = pound_or_pence
+  def in_each_denomination(pound_or_pence)
+    remaining_coin = RemainingCoin.new(pound_or_pence[:value])
 
-    output = {}
-    denomination.each do |d|
-      num_in_denomination, remaining_coin = remaining_coin.divmod(d)
-      output[d] = num_in_denomination
+    in_each_denomination = {}
+
+    pound_or_pence[:demomination].each do |d|
+      num_in_denomination = remaining_coin.num_in_denomination(d)
+      if num_in_denomination > 0
+        in_each_denomination["#{pound_or_pence[:sign]}#{d}"] = num_in_denomination
+      end
     end
-    output
+    in_each_denomination
   end
 
   def coins
