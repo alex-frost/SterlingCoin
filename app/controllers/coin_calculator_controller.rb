@@ -8,7 +8,7 @@ class CoinCalculatorController < ApplicationController
 
     if coin_calculator.valid?
       flash[:sucess] = "You entered: #{coin_calculator_params}, in Stirling coins this is: " +
-        coin_calculator.amount_in_sterling
+        coin_calculator.amount_in_sterling.to_s.gsub('=>', ' x ')
     else
       flash[:error] = "Number Format Not Recognised"
     end

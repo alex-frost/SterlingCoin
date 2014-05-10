@@ -8,9 +8,10 @@ feature "Sterling coin calculator", type: :feature do
   def enter_amount_of_money
     visit "/"
     fill_in :amount, with: "£4.47"
+    click_on 'Calculate'
   end
 
   def see_minimum_sterling_coins_for_amount
-    page.should have_content "2x £2, 2x 20p, 1x 5p, 1x 2p"
+    page.should have_content '"£2" x 2, "20p" x 2, "5p" x 1, "2p" x 1'
   end
 end
