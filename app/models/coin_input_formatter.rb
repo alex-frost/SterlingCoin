@@ -13,7 +13,7 @@ class CoinInputFormatter
   end
 
   def pounds
-    @pounds ||= safe_convert_to_int(split_into_pounds_and_pence[0])
+    @pounds ||= safe_convert_to_int(pounds_and_pence[0])
   end
 
   def pence
@@ -23,7 +23,7 @@ class CoinInputFormatter
   private
 
   def ten_times_input_pence_padded
-    input_pence = split_into_pounds_and_pence[1]
+    input_pence = pounds_and_pence[1]
 
     begin
       first, second, third = input_pence.split('')
@@ -51,6 +51,22 @@ class CoinInputFormatter
         nil
       end
     end
+  end
+
+  def pounds_and_pence
+    @pounds_and_pence ||= if !money_sign.has_pound_sign? && !after_decimal_point
+                             [nil, before_decimal_point]
+                           else
+                             [before_decimal_point, after_decimal_point]
+                           end
+  end
+
+  def before_decimal_point
+    split_into_pounds_and_pence[0]
+  end
+
+  def after_decimal_point
+    split_into_pounds_and_pence[1]
   end
 
   def split_into_pounds_and_pence
