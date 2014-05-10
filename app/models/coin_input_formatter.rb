@@ -6,11 +6,22 @@ class CoinInputFormatter
     split_into_pounds_and_pence
   end
 
+  def valid?
+    if @pound && @pence
+      true
+    else
+      false
+    end
+  end
 
   def split_into_pounds_and_pence
     pounds_and_pence = remove_pounds_and_pence_signs.split(".")
-    @pounds = Integer pounds_and_pence[0]
-    @pence = Integer pounds_and_pence[1]
+    begin
+      @pounds = Integer pounds_and_pence[0]
+      @pence = Integer pounds_and_pence[1]
+    rescue
+      nil
+    end
     pounds_and_pence
   end
 
