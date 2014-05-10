@@ -54,7 +54,7 @@ class CoinInputFormatter
   end
 
   def pounds_and_pence
-    @pounds_and_pence ||= if !money_sign.has_pound_sign? && !after_decimal_point
+    @pounds_and_pence ||= if !money_sign.pound_sign? && !after_decimal_point
                              [nil, before_decimal_point]
                            else
                              [before_decimal_point, after_decimal_point]
