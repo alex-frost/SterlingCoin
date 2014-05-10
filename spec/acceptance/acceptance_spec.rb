@@ -6,6 +6,7 @@ feature "Sterling coin calculator", type: :feature do
   end
 
   def enter_amount_of_money
+    visit "/"
     fill_in :amount, with: "£4.47"
   end
 
