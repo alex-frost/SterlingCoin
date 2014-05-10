@@ -22,5 +22,19 @@ describe PenceOnly do
     its(:pounds) {should == 2}
   end
 
+  context "handels no input" do
+    let(:amount_in_pence) { "" }
+
+    its(:pence) {should == nil}
+    its(:pounds) {should == nil}
+  end
+
+  context "handels invalid input" do
+    let(:amount_in_pence) { "12x" }
+
+    its(:pence) {should == nil}
+    its(:pounds) {should == nil}
+  end
+
 end
 
