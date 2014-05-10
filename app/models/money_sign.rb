@@ -15,6 +15,10 @@ class MoneySign
     @pence_sign ||= (@value[-1] == "p")
   end
 
+  def no_pound_and_no_decimal?
+    !pound_sign? && !decimal_point?
+   end
+
   def remove_pounds_and_pence_signs
     striped = if pound_sign?
                 @value[1..-1]
