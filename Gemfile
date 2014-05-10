@@ -29,6 +29,14 @@ gem 'jbuilder', '~> 1.2'
 
 gem "slim-rails"
 
+group :test, :development do
+  gem 'byebug'
+end
+
+group :development do
+  gem "better_errors"
+end
+
 group :test do
   gem 'rspec-rails'
   gem "capybara"
