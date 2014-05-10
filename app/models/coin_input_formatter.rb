@@ -12,14 +12,34 @@ class CoinInputFormatter
     end
   end
 
-  private
-
   def pounds
     @pounds ||= safe_convert_to_int(split_into_pounds_and_pence[0])
   end
 
   def pence
-    @pence ||= safe_convert_to_int(split_into_pounds_and_pence[1])
+    @pence ||=  ((safe_convert_to_int ten_times_input_pence_padded) / 10.0).round
+  end
+
+  private
+
+  def ten_times_input_pence_padded
+    input_pence = split_into_pounds_and_pence[1]
+
+    begin
+      first, second, third = input_pence.split('')
+    rescue
+      "000" #case with no pence added after .
+    else
+      if first && second
+        if third
+          first + second + third
+        else
+          first + second + "0"
+        end
+      elsif first
+        first + "00"
+      end
+    end
   end
 
   def safe_convert_to_int(string_value)
