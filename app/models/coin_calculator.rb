@@ -24,10 +24,18 @@ class CoinCalculator
     pound_or_pence[:demomination].each do |d|
       num_in_denomination = remaining_coin.num_in_denomination(d)
       if num_in_denomination > 0
-        in_each_denomination["#{pound_or_pence[:sign]}#{d}"] = num_in_denomination
+        in_each_denomination[denomination_string(pound_or_pence[:sign],d)] = num_in_denomination
       end
     end
     in_each_denomination
+  end
+
+  def denomination_string(sign, demomination)
+    if sign == "p"
+      "#{demomination}#{sign}"
+    else
+      "#{sign}#{demomination}"
+    end
   end
 
   def coins
