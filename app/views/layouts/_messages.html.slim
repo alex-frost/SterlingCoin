@@ -1,0 +1,7 @@
+- flash.each do |name, msg|
+  - if msg.is_a?(String)
+      - css_class = bootstrap_flash_class(name)
+      div class=("alert alert-#{css_class}")
+
+        button.close aria-hidden="true" data-dismiss="alert" type="button"  &times;
+        = content_tag :div, msg, :id => "flash_#{css_class}"
