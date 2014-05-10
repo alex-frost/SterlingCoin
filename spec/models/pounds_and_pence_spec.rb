@@ -14,4 +14,14 @@ describe PoundAndPence do
     its(:pounds) {should == 4}
     its(:pence) {should == 24}
   end
+
+  context "handels invalid input" do
+    let(:input_amount) { "12x" }
+
+    it "logs the error"do
+      Rails.logger.should_receive(:error)
+      subject.pounds.should == nil
+      subject.pence.should == 0
+    end
+  end
 end

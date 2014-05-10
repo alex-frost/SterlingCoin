@@ -105,18 +105,42 @@ describe CoinInputFormatter do
     let(:input_amount) {""}
 
     its(:valid?) {should == false}
+
+    it "pounds to be graceful" do
+      expect {subject.pounds}.to_not raise_error
+    end
+
+    it "pence to be graceful" do
+      expect {subject.pence}.to_not raise_error
+    end
   end
 
   context "non-numeric character" do
     let(:input_amount) {"£1x.0p"}
 
     its(:valid?) {should == false}
+
+    it "pounds to be graceful" do
+      expect {subject.pounds}.to_not raise_error
+    end
+
+    it "pence to be graceful" do
+      expect {subject.pence}.to_not raise_error
+    end
   end
 
   context "missing digits" do
     let(:input_amount) {"£p"}
 
     its(:valid?) {should == false}
+
+    it "pounds to be graceful" do
+      expect {subject.pounds}.to_not raise_error
+    end
+
+    it "pence to be graceful" do
+      expect {subject.pence}.to_not raise_error
+    end
   end
 end
 

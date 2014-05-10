@@ -8,7 +8,7 @@ class PoundAndPence
   end
 
   def pence
-    @pence ||= if after_decimal_point && !@invalid
+    @pence ||= if after_decimal_point
                  ((safe_convert_to_int ten_times_input_pence_padded) / 10.0).round
                else
                  0
@@ -53,8 +53,8 @@ class PoundAndPence
     if string_value
       begin
         Integer string_value
-      rescue ArgumentError
-        @invalid = true
+      rescue ArgumentError => ex
+        Rails.logger.error ex.message
         nil
       end
     end
