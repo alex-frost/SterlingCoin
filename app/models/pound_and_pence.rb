@@ -8,8 +8,8 @@ class PoundAndPence
   end
 
   def pence
-    @pence ||= if after_decimal_point
-                 safe_convert_to_int after_decimal_point
+    @pence ||= if after_decimal_point && !@invalid
+                 ((safe_convert_to_int ten_times_input_pence_padded) / 10.0).round
                else
                  0
                end
