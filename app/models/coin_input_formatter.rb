@@ -6,7 +6,7 @@ class CoinInputFormatter
   end
 
   def valid?
-    if pounds && pence
+    if pounds && pence && pounds >= 0 && pence >= 0
       true
     else
       false

@@ -156,5 +156,17 @@ describe CoinInputFormatter do
       expect {subject.pence}.to_not raise_error
     end
   end
+
+  context "negative pound input" do
+    let(:input_amount) { "£-1.2" }
+
+    its(:valid?) {should == false}
+  end
+
+  context "negative pence input" do
+    let(:input_amount) { "£0.-22" }
+
+    its(:valid?) {should == false}
+  end
 end
 
