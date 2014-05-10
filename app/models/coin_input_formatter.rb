@@ -1,31 +1,41 @@
 class CoinInputFormatter
-  attr_reader :pounds, :pence
 
   def initialize(input_amount)
     @input_amount = input_amount
-    split_into_pounds_and_pence
   end
 
   def valid?
-    if @pound && @pence
+    if @pound && @pence && !@invalid
       true
     else
       false
     end
   end
 
-  def split_into_pounds_and_pence
-    pounds_and_pence = remove_pounds_and_pence_signs.split(".")
-    begin
-      @pounds = Integer pounds_and_pence[0]
-      @pence = Integer pounds_and_pence[1]
-    rescue
-      nil
-    end
-    pounds_and_pence
+  private
+
+  def pounds
+    @pounds ||= safe_convert_to_int(split_into_pounds_and_pence[0])
   end
 
-  private
+  def pence
+    @pence ||= safe_convert_to_int(split_into_pounds_and_pence[1])
+  end
+
+  def safe_convert_to_int(string_value)
+    if string_value
+      begin
+        Integer string_value
+      rescue ArgumentError
+        @invalid = true
+        nil
+      end
+    end
+  end
+
+  def split_into_pounds_and_pence
+    remove_pounds_and_pence_signs.split(".")
+  end
 
   def remove_pounds_and_pence_signs
     striped = (@input_amount[0] == "£") ? @input_amount[1..-1] : @input_amount
