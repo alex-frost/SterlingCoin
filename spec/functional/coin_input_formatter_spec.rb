@@ -8,6 +8,7 @@ describe CoinInputFormatter do
 
     its(:pounds) {should == 0}
     its(:pence)  {should == 4}
+    its(:valid?) {should == true}
   end
 
   context "double digit" do
@@ -15,6 +16,7 @@ describe CoinInputFormatter do
 
     its(:pounds) {should == 0}
     its(:pence) {should == 85}
+    its(:valid?) {should == true}
   end
 
   context "pence symbol" do
@@ -22,6 +24,7 @@ describe CoinInputFormatter do
 
     its(:pounds) {should == 1}
     its(:pence) {should == 97}
+    its(:valid?) {should == true}
   end
 
   context "pence symbol single digit" do
@@ -29,6 +32,7 @@ describe CoinInputFormatter do
 
     its(:pounds) {should == 0}
     its(:pence) {should == 2}
+    its(:valid?) {should == true}
   end
 
   context "pounds decimal" do
@@ -36,6 +40,7 @@ describe CoinInputFormatter do
 
     its(:pounds) {should == 1}
     its(:pence) {should == 87}
+    its(:valid?) {should == true}
   end
 
   context "pound symbol" do
@@ -43,6 +48,7 @@ describe CoinInputFormatter do
 
     its(:pounds) {should == 1}
     its(:pence)  {should == 23}
+    its(:valid?) {should == true}
   end
 
   context "single digit pound symbol" do
@@ -50,6 +56,7 @@ describe CoinInputFormatter do
 
     its(:pounds) {should == 2}
     its(:pence) {should == 0}
+    its(:valid?) {should == true}
   end
 
   context "double digit pound symbol" do
@@ -57,6 +64,7 @@ describe CoinInputFormatter do
 
     its(:pounds) {should == 10}
     its(:pence) {should == 0}
+    its(:valid?) {should == true}
   end
 
   context "pound and pence symbol" do
@@ -64,6 +72,7 @@ describe CoinInputFormatter do
 
     its(:pounds) {should == 1}
     its(:pence) {should == 87}
+    its(:valid?) {should == true}
   end
 
   context "missing pence" do
@@ -71,6 +80,7 @@ describe CoinInputFormatter do
 
     its(:pounds) {should == 1}
     its(:pence) {should == 0}
+    its(:valid?) {should == true}
   end
 
   context "missing pence but present decimal point" do
@@ -78,6 +88,7 @@ describe CoinInputFormatter do
 
     its(:pounds) {should == 1}
     its(:pence) {should == 0}
+    its(:valid?) {should == true}
   end
 
   context "buffered zeros" do
@@ -85,6 +96,7 @@ describe CoinInputFormatter do
 
     its(:pounds) {should == 1}
     its(:pence) {should == 41}
+    its(:valid?) {should == true}
   end
 
   context "rounding three decimal places to two" do
@@ -92,6 +104,7 @@ describe CoinInputFormatter do
 
     its(:pounds) {should == 4}
     its(:pence) {should == 24}
+    its(:valid?) {should == true}
   end
 
   context "rounding with symbols" do
@@ -99,6 +112,7 @@ describe CoinInputFormatter do
 
     its(:pounds) {should == 1}
     its(:pence) {should == 26}
+    its(:valid?) {should == true}
   end
 
   context "empty string" do

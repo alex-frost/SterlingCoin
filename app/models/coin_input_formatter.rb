@@ -6,7 +6,7 @@ class CoinInputFormatter
   end
 
   def valid?
-    if @pound && @pence && !@invalid
+    if pounds && pence
       true
     else
       false
