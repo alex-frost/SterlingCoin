@@ -66,7 +66,7 @@ describe CoinInputFormatter do
     its(:pence) {should == 87}
   end
 
-  context "missing pence" do 
+  context "missing pence" do
     let(:input_amount) {"£1p"}
 
     its(:pounds) {should == 1}
