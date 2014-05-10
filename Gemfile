@@ -29,6 +29,8 @@ gem 'jbuilder', '~> 1.2'
 
 gem "slim-rails"
 
+gem "twitter-bootstrap-rails"
+
 group :test, :development do
   gem 'byebug'
 end
